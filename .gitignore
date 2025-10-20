@@ -1,0 +1,6 @@
+__pycache__/
+cc1_predictor/
+direct_controllable_predictor/
+excel_data/
+oem_id_predictor/
+.flake8

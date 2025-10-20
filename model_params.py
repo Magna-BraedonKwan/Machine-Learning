@@ -1,0 +1,63 @@
+OEM_PARAMS = {
+    "objective": "multi:softprob",
+    "n_estimators": 500,
+    "learning_rate": 0.05,
+    "max_depth": 8,
+    "subsample": 0.8,
+    "colsample_bytree": 0.6,
+    "random_state": 42,
+    "min_child_weight": 1,
+    "gamma": 0.0,
+    "reg_alpha": 0.0,
+    "reg_lambda": 1.0,
+    "tree_method": "hist",
+    "device": "cuda",
+    "verbosity": 2,
+}
+
+CC1_PARAMS = {
+    "objective": "multi:softprob",
+    "n_estimators": 300,
+    "learning_rate": 0.05,
+    "max_depth": 8,
+    "subsample": 0.7,
+    "colsample_bytree": 0.6,
+    "random_state": 42,
+    "min_child_weight": 25,
+    "gamma": 0.0,
+    "reg_alpha": 0.0,
+    "reg_lambda": 1.0,
+    "tree_method": "hist",
+    "device": "cuda",
+    "verbosity": 2,
+}
+
+DC_PARAMS = {
+    "objective": "multi:softprob",
+    "n_estimators": 300,
+    "learning_rate": 0.05,
+    "max_depth": 8,
+    "subsample": 0.7,
+    "colsample_bytree": 0.6,
+    "random_state": 42,
+    "min_child_weight": 25,
+    "gamma": 0.5,
+    "reg_alpha": 0.0,
+    "reg_lambda": 1.0,
+    "tree_method": "hist",
+    "device": "cuda",
+    "verbosity": 2,
+}
+
+CLUSTER_PARAMS = {
+    "min_cluster_size": 3,
+    "min_samples": 8,
+    "cluster_selection_method": "leaf",
+    "cluster_selection_epsilon": 0.001,
+    "metric": "euclidean",
+    "alpha": 1.0,
+    "algorithm": "best",
+    "leaf_size": 20,
+    "p": 2,
+    "prediction_data": True,
+}
