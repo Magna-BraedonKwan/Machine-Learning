@@ -25,7 +25,7 @@ def main():
     for name, cols, transformer in pipeline:
         if name == "target_encoder":
             target_encoder = transformer
-            dfs.append(pd.DataFrame())
+            dfs.append(pd.DataFrame())  # ensure dfs structure remains consistent
         elif name == "transformer_emb":
             block, _ = get_text_embeddings(df, cols, transformer)
             dfs.append(block)

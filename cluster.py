@@ -7,10 +7,10 @@ from model_params import CLUSTER_PARAMS
 from pipelines import cluster_pipeline
 
 # File paths
-FOLDER = "oem_id_predictor"
-train_path = os.path.join(FOLDER, "global_parts_data.csv")
-pre_path = os.path.join(FOLDER, "cluster_preprocessed.csv")
-pipeline_path = os.path.join(FOLDER, "cluster_pipeline.pkl")
+FOLDER = "indirect_cc_predictor"
+train_path = os.path.join(FOLDER, "parts_data.csv")
+pre_path = os.path.join(FOLDER, "preprocessed.csv")
+pipeline_path = os.path.join(FOLDER, "pipeline.pkl")
 results_path = os.path.join(FOLDER, "clusters.csv")
 
 # Settings

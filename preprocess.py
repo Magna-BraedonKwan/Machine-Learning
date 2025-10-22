@@ -12,6 +12,9 @@ from sentence_transformers import SentenceTransformer
 from transformers import AutoTokenizer, AutoModel
 
 
+# TODO: Add a time series split
+
+
 def split_data(df, target_col, val_size, random_state=42):
     idx = np.arange(len(df))
     mask = np.ones(len(df), dtype=bool)
@@ -56,6 +59,7 @@ def encode_hashing(df, cols, n_components=8, encoder=None):
     return pd.DataFrame(arr, columns=col_names), ("hashing_encoder", cols, encoder)
 
 
+# TODO: Need to fix for data leakage
 def get_grouped_value_ratios(df, cols, target_col):
 
     # Count occurrences of each target value per group
@@ -197,7 +201,11 @@ def scale_features(dfs, index, train_mask=None, scaler=None):
         scaler = StandardScaler().fit(df.loc[train_mask])
     scaled = scaler.transform(df)
     cols = df.columns
-    return pd.DataFrame(scaled, columns=cols), ("scaler", index - 1, scaler)
+    return pd.DataFrame(scaled, columns=cols), (
+        "scaler",
+        index - 1,
+        scaler,
+    )  # index - 1 b/c dfs[0] is the train mask which is later dropped
 
 
 def apply_pca(
@@ -214,7 +222,11 @@ def apply_pca(
         pca.fit(df.loc[train_mask])
     pcs = pca.transform(df)
     cols = [f"PC_{df.columns[0]}..._{i+1}" for i in range(pcs.shape[1])]
-    return pd.DataFrame(pcs, columns=cols), ("pca", index - 1, pca)
+    return pd.DataFrame(pcs, columns=cols), (
+        "pca",
+        index - 1,
+        pca,
+    )  # index - 1 b/c dfs[0] is the train mask which is later dropped
 
 
 def combine_features(dfs):

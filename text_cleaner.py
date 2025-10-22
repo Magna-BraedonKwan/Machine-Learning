@@ -3,9 +3,9 @@ import re
 from tqdm import tqdm
 
 # Settings
-FOLDER_PATH = "excel_data"
-FILE_NAME = "Mapping.csv"
-TARGET_COL = "Translated"
+FOLDER_PATH = "indirect_cc_predictor"
+FILE_NAME = "parts_data.csv"
+TARGET_COL = "Category L4"
 
 
 def clean_text(text):

@@ -181,7 +181,64 @@ def cluster_pipeline(df, pre_path, pipeline_path):
 
     # TF-IDF of part description (cleaned)
     processed_df, trans = get_tfidf(
-        df, "Cleaned", min_df=50, max_df=0.1, max_features=100, train_mask=train_mask
+        df, "Part Description", min_df=10, max_df=0.5, max_features=100, train_mask=train_mask
+    )
+    pipeline.append(trans)
+    dfs.append(processed_df)
+
+    # Embed part description (cleaned)
+    processed_df, trans = get_text_embeddings(
+        df,
+        "Part Description",
+        "ST",
+    )
+    pipeline.append(trans)
+    dfs.append(processed_df)
+
+    # TF-IDF of part description (cleaned)
+    processed_df, trans = get_tfidf(
+        df, "Category L1", min_df=10, max_df=0.5, max_features=100, train_mask=train_mask
+    )
+    pipeline.append(trans)
+    dfs.append(processed_df)
+
+    # Embed part description (cleaned)
+    processed_df, trans = get_text_embeddings(
+        df,
+        "Category L1",
+        "ST",
+    )
+    pipeline.append(trans)
+    dfs.append(processed_df)
+
+    # TF-IDF of part description (cleaned)
+    processed_df, trans = get_tfidf(
+        df, "Category L2", min_df=10, max_df=0.5, max_features=100, train_mask=train_mask
+    )
+    pipeline.append(trans)
+    dfs.append(processed_df)
+
+    # Embed part description (cleaned)
+    processed_df, trans = get_text_embeddings(
+        df,
+        "Category L2",
+        "ST",
+    )
+    pipeline.append(trans)
+    dfs.append(processed_df)
+
+    # TF-IDF of part description (cleaned)
+    processed_df, trans = get_tfidf(
+        df, "Category L3", min_df=10, max_df=0.5, max_features=100, train_mask=train_mask
+    )
+    pipeline.append(trans)
+    dfs.append(processed_df)
+
+    # Embed part description (cleaned)
+    processed_df, trans = get_text_embeddings(
+        df,
+        "Category L3",
+        "ST",
     )
     pipeline.append(trans)
     dfs.append(processed_df)
