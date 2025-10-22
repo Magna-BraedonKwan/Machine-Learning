@@ -4,8 +4,8 @@ from tqdm import tqdm
 
 # Settings
 FOLDER_PATH = "indirect_cc_predictor"
-FILE_NAME = "parts_data.csv"
-TARGET_COL = "Category L4"
+FILE_NAME = "l2_labels_desc.csv"
+TARGET_COL = "Desc"
 
 
 def clean_text(text):
