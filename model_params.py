@@ -61,3 +61,20 @@ CLUSTER_PARAMS = {
     "p": 2,
     "prediction_data": True,
 }
+
+CC_PARAMS = {
+    "objective": "multi:softprob",
+    "n_estimators": 300,
+    "learning_rate": 0.05,
+    "max_depth": 6,
+    "subsample": 0.8,
+    "colsample_bytree": 0.8,
+    "random_state": 42,
+    "min_child_weight": 5,
+    "gamma": 0.5,
+    "reg_alpha": 0.0,
+    "reg_lambda": 1.0,
+    "tree_method": "hist",
+    "device": "cuda",
+    "verbosity": 2,
+}

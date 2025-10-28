@@ -3,20 +3,20 @@ import numpy as np
 from sklearn.utils import compute_class_weight
 from xgboost import XGBClassifier
 from preprocess import *
-from model_params import OEM_PARAMS, CC1_PARAMS, DC_PARAMS
-from pipelines import oem_pipeline, cc1_pipeline, dc_pipeline
+from model_params import OEM_PARAMS, CC1_PARAMS, DC_PARAMS, CC_PARAMS
+from pipelines import oem_pipeline, cc1_pipeline, dc_pipeline, cc_pipeline
 
 # File paths
-FOLDER = "oem_id_predictor"
-train_path = os.path.join(FOLDER, "oem_id_training_data.csv")
+FOLDER = "indirect_cc_predictor"
+train_path = os.path.join(FOLDER, "train_data.csv")
 pre_path = os.path.join(FOLDER, "preprocessed.csv")
 pipeline_path = os.path.join(FOLDER, "pipeline.pkl")
 model_path = os.path.join(FOLDER, "xgb_model.pkl")
 results_path = os.path.join(FOLDER, "results.csv")
 
 # Settings
-xgb_params = OEM_PARAMS
-create_pipeline = oem_pipeline
+xgb_params = CC_PARAMS
+create_pipeline = cc_pipeline
 use_class_weights = False
 
 

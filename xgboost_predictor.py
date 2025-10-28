@@ -3,8 +3,8 @@ import pandas as pd
 from preprocess import *
 
 # Paths
-FOLDER = "oem_id_predictor"
-TEST_PATH = os.path.join(FOLDER, "global_parts_data.csv")
+FOLDER = "indirect_cc_predictor"
+TEST_PATH = os.path.join(FOLDER, "parts_data.csv")
 PIPELINE_PATH = os.path.join(FOLDER, "pipeline.pkl")
 MODEL_PATH = os.path.join(FOLDER, "xgb_model.pkl")
 RESULTS_PATH = os.path.join(FOLDER, "results2.csv")

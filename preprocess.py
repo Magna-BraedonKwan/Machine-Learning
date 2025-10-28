@@ -12,8 +12,16 @@ from sentence_transformers import SentenceTransformer
 from transformers import AutoTokenizer, AutoModel
 
 
-# TODO: Add a time series split
 
+def split_data_time_series(df, val_size):
+    n = len(df)
+    if isinstance(val_size, float):
+        val_size = int(n * val_size)
+    val_size = max(0, min(val_size, n))
+    mask = np.ones(n, dtype=bool)
+    if val_size > 0:
+        mask[-val_size:] = False
+    return pd.DataFrame(mask, columns=["Train Mask"])
 
 def split_data(df, target_col, val_size, random_state=42):
     idx = np.arange(len(df))
@@ -159,7 +167,7 @@ def get_char_freq(df, text_col):
     ]
     return pd.DataFrame(matrix, columns=cols), ("char_freq", text_col, None)
 
-
+# TODO: remove stop words
 def get_tfidf(
     df,
     text_col,

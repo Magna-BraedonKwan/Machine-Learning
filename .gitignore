@@ -3,6 +3,5 @@ cc1_predictor/
 direct_controllable_predictor/
 excel_data/
 oem_id_predictor/
-indirect_cc_predictor/
 .flake8
 .venv/
