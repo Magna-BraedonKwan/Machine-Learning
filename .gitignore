@@ -5,3 +5,5 @@ excel_data/
 oem_id_predictor/
 .flake8
 .venv/
+cluster.py
+translator.py

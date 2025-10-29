@@ -4,14 +4,17 @@ import inspect
 import pandas as pd
 from tqdm import tqdm
 from googletrans import Translator
+from preprocess import save_df
 
 # Settings
 FOLDER = "excel_data"
 FILE = "Mapping.csv"
 TARGET_COL = "Part Name"
+OUTPUT_COL = "Translated"
 LANG = "en"
 MAX_RETRIES = 5
 INITIAL_BACKOFF = 1.0
+ENFORCED_TEXT_COLS = []
 
 
 def translate(translator, text, max_retries, initial_backoff, lang):
@@ -33,7 +36,7 @@ def translate(translator, text, max_retries, initial_backoff, lang):
             else:
                 print(f"[WARNING]: Trying again to translate text")
                 time.sleep(backoff)
-                backoff *= 2  # Double backoff timeout
+                backoff *= 2  # double backoff timeout
 
 
 def main():
@@ -57,8 +60,9 @@ def main():
         print("[WARNING]: Interrupted! Saving in progress…")
 
     # Save translated column
-    df["Translated"] = translated_texts + [""] * (len(df) - len(translated_texts))
-    df.to_csv(src, index=False, encoding="utf-8-sig")
+    df[OUTPUT_COL] = translated_texts + [""] * (len(df) - len(translated_texts))
+    save_df(df, src, ENFORCED_TEXT_COLS)
+
     print("Saved results")
 
 

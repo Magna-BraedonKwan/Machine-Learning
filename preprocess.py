@@ -12,7 +12,7 @@ from sentence_transformers import SentenceTransformer
 from transformers import AutoTokenizer, AutoModel
 
 
-
+# DataFrame must be sorted by date in ascending order
 def split_data_time_series(df, val_size):
     n = len(df)
     if isinstance(val_size, float):
@@ -22,6 +22,7 @@ def split_data_time_series(df, val_size):
     if val_size > 0:
         mask[-val_size:] = False
     return pd.DataFrame(mask, columns=["Train Mask"])
+
 
 def split_data(df, target_col, val_size, random_state=42):
     idx = np.arange(len(df))
@@ -56,6 +57,7 @@ def encode_ordinal(df, cols, train_mask=None, encoder=None):
     return pd.DataFrame(encoded, columns=cols), ("ordinal_encoder", cols, encoder)
 
 
+# TODO: .fit() is not needed for hashing?
 def encode_hashing(df, cols, n_components=8, encoder=None):
     if encoder is None:
         encoder = HashingEncoder(
@@ -67,7 +69,7 @@ def encode_hashing(df, cols, n_components=8, encoder=None):
     return pd.DataFrame(arr, columns=col_names), ("hashing_encoder", cols, encoder)
 
 
-# TODO: Need to fix for data leakage
+# TODO: fix data leakage issue
 def get_grouped_value_ratios(df, cols, target_col):
 
     # Count occurrences of each target value per group
@@ -167,6 +169,7 @@ def get_char_freq(df, text_col):
     ]
     return pd.DataFrame(matrix, columns=cols), ("char_freq", text_col, None)
 
+
 # TODO: remove stop words
 def get_tfidf(
     df,
@@ -213,7 +216,7 @@ def scale_features(dfs, index, train_mask=None, scaler=None):
         "scaler",
         index - 1,
         scaler,
-    )  # index - 1 b/c dfs[0] is the train mask which is later dropped
+    )  # offset by 1 (index - 1) b/c train_mask is not needed for inference
 
 
 def apply_pca(
@@ -234,14 +237,21 @@ def apply_pca(
         "pca",
         index - 1,
         pca,
-    )  # index - 1 b/c dfs[0] is the train mask which is later dropped
+    )  # offset by 1 (index - 1) b/c train_mask is not needed for inference
 
 
 def combine_features(dfs):
     return pd.concat(dfs, axis=1)
 
 
-def save_df(df, path):
+def save_df(df, path, enforced_text_cols=[]):
+    for col in enforced_text_cols:
+        if col not in df.columns:
+            raise KeyError(f"Column '{col}' not found in DataFrame.")
+        try:
+            df[col] = df[col].astype(str)
+        except Exception as e:
+            raise TypeError(f"Failed to cast column '{col}' to str: {e}")
     df.to_csv(path, index=False, encoding="utf-8-sig")
 
 

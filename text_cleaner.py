@@ -1,11 +1,14 @@
 import pandas as pd
 import re
 from tqdm import tqdm
+from preprocess import save_df
 
 # Settings
 FOLDER_PATH = "indirect_cc_predictor"
-FILE_NAME = "l2_labels_desc.csv"
-TARGET_COL = "Desc"
+FILE_NAME = "parts_data.csv"
+TARGET_COL = "Category L4"
+OUTPUT_COL = "Category L4 - Cleaned"
+ENFORCED_TEXT_COLS = []
 
 
 def clean_text(text):
@@ -23,10 +26,10 @@ def clean_column(file_path, column_name):
         return
 
     # Clean column and save results
-    df["Cleaned"] = [
+    df[OUTPUT_COL] = [
         clean_text(str(txt)) for txt in tqdm(df[column_name], desc="Cleaning")
     ]
-    df.to_csv(file_path, index=False, encoding="utf-8-sig")
+    save_df(df, file_path, ENFORCED_TEXT_COLS)
 
 
 if __name__ == "__main__":

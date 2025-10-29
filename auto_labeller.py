@@ -9,7 +9,7 @@ from preprocess import load_df, save_df, get_text_embeddings  # your helpers
 # --- File paths
 FOLDER = "indirect_cc_predictor"
 input_path = os.path.join(FOLDER, "parts_data.csv")
-output_path = os.path.join(FOLDER, "auto_label_1.csv")
+output_path = os.path.join(FOLDER, "auto_label_2.csv")
 
 # --- Configure these
 feature_columns = [
@@ -98,7 +98,7 @@ df = load_df(input_path)
 # --- Guardrails
 if not feature_columns:
     raise ValueError("feature_columns is empty. Add at least one text column to embed.")
-if not possible_labels_1:
+if not possible_labels_2:
     raise ValueError(
         "possible_labels is empty. Provide a list of candidate label strings."
     )
@@ -108,8 +108,8 @@ for col in feature_columns:
 
 # --- Prepare labels (names) and their descriptions (to embed)
 # possible_labels: dict[str, str]  e.g., {"Abrasives": "abrasives blasting ...", ...}
-labels = list(possible_labels_1.keys())  # what we'll output
-label_desc = list(possible_labels_1.values())  # what we'll embed
+labels = list(possible_labels_2.keys())  # what we'll output
+label_desc = list(possible_labels_2.values())  # what we'll embed
 
 # --- Embed label DESCRIPTIONS once (consistent embedding space)
 label_df = pd.DataFrame({"label_text": label_desc})
