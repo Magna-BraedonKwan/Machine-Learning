@@ -4,7 +4,7 @@ from sklearn.utils import compute_class_weight
 from xgboost import XGBClassifier
 from preprocess import *
 from model_params import OEM_PARAMS, CC1_PARAMS, DC_PARAMS, CC_PARAMS
-from pipelines import oem_pipeline, cc1_pipeline, dc_pipeline, cc_pipeline
+from pipelines import oem_pipeline, cc1_pipeline, dc_pipeline, indirect_cc_pipeline
 
 # File paths
 FOLDER = "indirect_cc_predictor"
@@ -16,8 +16,8 @@ results_path = os.path.join(FOLDER, "results.csv")
 
 # Settings
 xgb_params = CC_PARAMS
-create_pipeline = cc_pipeline
-use_class_weights = False
+create_pipeline = indirect_cc_pipeline
+use_class_weights = True
 
 
 def main():

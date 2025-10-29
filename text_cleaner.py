@@ -3,6 +3,7 @@ import re
 from tqdm import tqdm
 from preprocess import save_df
 
+
 # Settings
 FOLDER_PATH = "indirect_cc_predictor"
 FILE_NAME = "parts_data.csv"

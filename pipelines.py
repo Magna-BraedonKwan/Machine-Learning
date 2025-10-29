@@ -269,16 +269,14 @@ def cluster_pipeline(df, pre_path, pipeline_path):
     save_pkl(pipeline, pipeline_path)
 
 
-def cc_pipeline(df, pre_path, pipeline_path):
+def indirect_cc_pipeline(df, pre_path, pipeline_path):
     pipeline = []
     dfs = []
 
     # Split data into train/validation sets and encode target
     train_mask = init_pipeline(df, "target", 0.2, dfs, pipeline)
 
-    # Part Description - Cleaned,Category L1 - Cleaned,Category L2 - Cleaned,Category L3 - Cleaned,Category L4 - Cleaned
-
-    # Embed part description (cleaned)
+    # Feature engineering for part description
     processed_df, trans = get_text_embeddings(
         df,
         "Part Description - Cleaned",
@@ -286,21 +284,13 @@ def cc_pipeline(df, pre_path, pipeline_path):
     )
     pipeline.append(trans)
     dfs.append(processed_df)
-
-    # Scale embedded features
     dfs[2], trans = scale_features(dfs, 2, train_mask=train_mask)
     pipeline.append(trans)
-
-    # Apply PCA to embedded features
     dfs[2], trans = apply_pca(dfs, 2, 100, train_mask=train_mask)
     pipeline.append(trans)
-
-    # Char frequency of part description (cleaned)
     processed_df, trans = get_char_freq(df, "Part Description - Cleaned")
     pipeline.append(trans)
     dfs.append(processed_df)
-
-    # TF-IDF of part description (cleaned)
     processed_df, trans = get_tfidf(
         df,
         "Part Description - Cleaned",
@@ -312,7 +302,7 @@ def cc_pipeline(df, pre_path, pipeline_path):
     pipeline.append(trans)
     dfs.append(processed_df)
 
-    # Embed part description (cleaned)
+    # Feature engineering for category L1
     processed_df, trans = get_text_embeddings(
         df,
         "Category L1 - Cleaned",
@@ -320,21 +310,13 @@ def cc_pipeline(df, pre_path, pipeline_path):
     )
     pipeline.append(trans)
     dfs.append(processed_df)
-
-    # Scale embedded features
     dfs[5], trans = scale_features(dfs, 5, train_mask=train_mask)
     pipeline.append(trans)
-
-    # Apply PCA to embedded features
     dfs[5], trans = apply_pca(dfs, 5, 100, train_mask=train_mask)
     pipeline.append(trans)
-
-    # Char frequency of part description (cleaned)
     processed_df, trans = get_char_freq(df, "Category L1 - Cleaned")
     pipeline.append(trans)
     dfs.append(processed_df)
-
-    # TF-IDF of part description (cleaned)
     processed_df, trans = get_tfidf(
         df,
         "Category L1 - Cleaned",
@@ -346,7 +328,7 @@ def cc_pipeline(df, pre_path, pipeline_path):
     pipeline.append(trans)
     dfs.append(processed_df)
 
-    # Embed part description (cleaned)
+    # Feature engineering for category L2
     processed_df, trans = get_text_embeddings(
         df,
         "Category L2 - Cleaned",
@@ -354,21 +336,13 @@ def cc_pipeline(df, pre_path, pipeline_path):
     )
     pipeline.append(trans)
     dfs.append(processed_df)
-
-    # Scale embedded features
     dfs[8], trans = scale_features(dfs, 8, train_mask=train_mask)
     pipeline.append(trans)
-
-    # Apply PCA to embedded features
     dfs[8], trans = apply_pca(dfs, 8, 100, train_mask=train_mask)
     pipeline.append(trans)
-
-    # Char frequency of part description (cleaned)
     processed_df, trans = get_char_freq(df, "Category L2 - Cleaned")
     pipeline.append(trans)
     dfs.append(processed_df)
-
-    # TF-IDF of part description (cleaned)
     processed_df, trans = get_tfidf(
         df,
         "Category L2 - Cleaned",
@@ -380,7 +354,7 @@ def cc_pipeline(df, pre_path, pipeline_path):
     pipeline.append(trans)
     dfs.append(processed_df)
 
-    # Embed part description (cleaned)
+    # Feature engineering for category L3
     processed_df, trans = get_text_embeddings(
         df,
         "Category L3 - Cleaned",
@@ -388,21 +362,13 @@ def cc_pipeline(df, pre_path, pipeline_path):
     )
     pipeline.append(trans)
     dfs.append(processed_df)
-
-    # Scale embedded features
     dfs[11], trans = scale_features(dfs, 11, train_mask=train_mask)
     pipeline.append(trans)
-
-    # Apply PCA to embedded features
     dfs[11], trans = apply_pca(dfs, 11, 100, train_mask=train_mask)
     pipeline.append(trans)
-
-    # Char frequency of part description (cleaned)
     processed_df, trans = get_char_freq(df, "Category L3 - Cleaned")
     pipeline.append(trans)
     dfs.append(processed_df)
-
-    # TF-IDF of part description (cleaned)
     processed_df, trans = get_tfidf(
         df,
         "Category L3 - Cleaned",
@@ -414,7 +380,7 @@ def cc_pipeline(df, pre_path, pipeline_path):
     pipeline.append(trans)
     dfs.append(processed_df)
 
-    # Embed part description (cleaned)
+    # Feature engineering for category L4
     processed_df, trans = get_text_embeddings(
         df,
         "Category L4 - Cleaned",
@@ -422,21 +388,13 @@ def cc_pipeline(df, pre_path, pipeline_path):
     )
     pipeline.append(trans)
     dfs.append(processed_df)
-
-    # Scale embedded features
     dfs[14], trans = scale_features(dfs, 14, train_mask=train_mask)
     pipeline.append(trans)
-
-    # Apply PCA to embedded features
     dfs[14], trans = apply_pca(dfs, 14, 100, train_mask=train_mask)
     pipeline.append(trans)
-
-    # Char frequency of part description (cleaned)
     processed_df, trans = get_char_freq(df, "Category L4 - Cleaned")
     pipeline.append(trans)
     dfs.append(processed_df)
-
-    # TF-IDF of part description (cleaned)
     processed_df, trans = get_tfidf(
         df,
         "Category L4 - Cleaned",
