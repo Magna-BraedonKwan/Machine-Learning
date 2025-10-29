@@ -9,7 +9,7 @@ FOLDER_PATH = "indirect_cc_predictor"
 FILE_NAME = "parts_data.csv"
 TARGET_COL = "Category L4"
 OUTPUT_COL = "Category L4 - Cleaned"
-ENFORCED_TEXT_COLS = []
+ENFORCED_TEXT_COLS = ["Supplier Part Number"]
 
 
 def clean_text(text):
